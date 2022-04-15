@@ -24,11 +24,12 @@ export class ProductDetailsComponent implements OnInit {
 
   handleProductDetails() {
     // get the "id" param string and convert string to a number using the "+" symbol
-    let theProductId: any = this.route.snapshot.paramMap.get('id');
+    // had to use the parseInt() because it is not working without setting strictNullChecks to false in tsconfig.json
+    const idNumber: any = this.route.snapshot.paramMap.get('id');
     
-    const idNum = parseInt(theProductId);
+    const theProductId = parseInt(idNumber);
 
-    this.productService.getProduct(idNum).subscribe((data) => {
+    this.productService.getProduct(theProductId).subscribe((data) => {
       this.product = data;
     });
   }
